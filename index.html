@@ -30,9 +30,6 @@ p{margin:0 0 10px}
 .btn.ghost{background:transparent;color:var(--pri2);border:1.5px solid var(--pri2)}
 .btn.rose{background:var(--pink)}
 .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
-.qrbox{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px;text-align:center}
-.qrbox svg{width:100%;max-width:190px;height:auto}
-.qrbox small{display:block;color:var(--mut);margin-top:8px;font-size:.82rem}
 .sec{padding:22px 0}
 .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px}
 .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
@@ -79,7 +76,6 @@ footer{border-top:1px solid var(--line);margin-top:26px;padding:18px 0 26px;colo
 .full div{border-radius:14px;padding:16px 10px;text-align:center}
 .full b{display:block;font-size:2.4rem;line-height:1;color:var(--ink)}
 .full span{font-weight:700;font-size:.92rem;color:var(--ink)}
-.qrrow{display:grid;grid-template-columns:.7fr 1.3fr;gap:16px;align-items:center}
 .grid .concern:nth-child(4n+1){border-top:5px solid var(--mint)}.grid .concern:nth-child(4n+2){border-top:5px solid var(--lav)}.grid .concern:nth-child(4n+3){border-top:5px solid var(--peach)}.grid .concern:nth-child(4n){border-top:5px solid var(--lem)}
 .tri{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:12px 0}
 .tri div{border-radius:16px;padding:16px;border:2px solid transparent}
@@ -91,7 +87,7 @@ footer{border-top:1px solid var(--line);margin-top:26px;padding:18px 0 26px;colo
 .dots{display:flex;gap:6px;align-items:center;margin-top:12px}.dots i{width:14px;height:14px;border-radius:50%;display:inline-block}
 @media(max-width:720px){.tri,.tri.three{grid-template-columns:1fr}}
 .view{display:none}.view.on{display:block}
-@media(max-width:720px){.hero{grid-template-columns:1fr;padding-top:22px}.cols{grid-template-columns:1fr}.full{grid-template-columns:1fr 1fr}.qrrow{grid-template-columns:1fr}}
+@media(max-width:720px){.hero{grid-template-columns:1fr;padding-top:22px}.cols{grid-template-columns:1fr}.full{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
@@ -106,19 +102,19 @@ footer{border-top:1px solid var(--line);margin-top:26px;padding:18px 0 26px;colo
 <g transform="translate(128 46)"><path d="M0 0 L-20 -12 L-20 12 Z M0 0 L20 -12 L20 12 Z" fill="#f48fb1"/><circle r="6" fill="#e0678f"/></g>
 </symbol></svg>
 <header><div class="wrap nav"><div class="logo" onclick="go('home')"><svg class="mini" viewBox="0 0 200 200"><use href="#pita"/></svg>PEKA</div><nav id="nav"></nav></div></header>
- 
+
 <main class="wrap">
 <section id="home" class="view on">
 <div class="hero">
 <div>
 <p class="mut" style="font-weight:700;margin-bottom:6px">Pendeteksian dan Edukasi Keluhan Area Intim</p>
 <h1>Ada yang terasa tidak nyaman? Cek dulu di sini.</h1>
-<p class="mut">Kamu membuka halaman ini lewat QR di bilik toilet sekolah. Di sini kamu bisa mencocokkan keluhanmu dengan beberapa pertanyaan singkat, lalu membaca cara menjaga kebersihan area intim. Tidak perlu login dan tidak ada yang tahu siapa kamu.</p>
+<p class="mut">Di sini kamu bisa mencocokkan keluhanmu dengan beberapa pertanyaan singkat, lalu membaca cara menjaga kebersihan area intim. Tidak perlu login dan tidak ada yang tahu siapa kamu.</p>
 <div class="row"><button class="btn" onclick="go('keluhan')">Cek keluhan</button><button class="btn ghost" onclick="go('bersih')">Baca soal kebersihan</button></div>
 </div>
 <div class="mascot"><div class="bubble">Halo, aku Pita! Di sini tidak ada yang tahu kamu siapa.</div><svg viewBox="0 0 200 200" role="img" aria-label="Pita, maskot PEKA berbentuk ular lucu"><use href="#pita"/></svg></div>
 </div>
- 
+
 <div class="sec"><h2>Apa itu PEKA?</h2>
 <p class="mut" style="margin-bottom:0">PEKA adalah singkatan dari <b>Pendeteksian dan Edukasi Keluhan Area Intim</b>. Namanya juga ajakan untuk lebih peka pada kondisi tubuh sendiri.</p>
 <div class="full">
@@ -128,7 +124,7 @@ footer{border-top:1px solid var(--line);margin-top:26px;padding:18px 0 26px;colo
 <div style="background:var(--lav)"><b>A</b><span>Area Intim</span></div>
 </div>
 </div>
- 
+
 <div class="sec"><h2>Triase ala PEKA</h2>
 <p class="mut" style="margin-bottom:0">Seperti triase di IGD, hasilmu dikelompokkan berdasarkan seberapa cepat kamu perlu ke tenaga kesehatan.</p>
 <div class="tri three" style="margin-bottom:8px">
@@ -136,11 +132,7 @@ footer{border-top:1px solid var(--line);margin-top:26px;padding:18px 0 26px;colo
 <div class="tk"><h3>Kuning</h3><span class="lv">1 sampai 3 hari</span></div>
 <div class="th"><h3>Hijau</h3><span class="lv">Pantau dulu</span></div></div>
 <button class="btn ghost" onclick="go('triase')">Baca penjelasan triase</button></div>
- 
-<div class="sec"><div class="qrrow"><div class="qrbox"><svg id="qr" viewBox="0 0 29 29" shape-rendering="crispEdges"></svg><small>Contoh QR di pintu atau dinding bilik</small></div>
-<div><h2>Tinggal scan di bilik toilet</h2><p class="mut">QR ditempel di dalam bilik, jadi kamu bisa membukanya sendirian dan tanpa harus bertanya ke siapa pun. Kalau perlu, Pita akan membantu mengarahkan ke bantuan yang tepat.</p></div></div></div>
- 
- 
+
 <div class="sec"><h2>Kenapa dibuat</h2>
 <p class="mut">Banyak remaja memilih mencari jawaban sendiri di internet, karena malu atau karena topiknya dianggap tabu. Hasilnya sering salah paham. <a href="#" onclick="go('sumber');return false" style="color:var(--pri2);font-weight:700">[12]</a> <a href="#" onclick="go('sumber');return false" style="color:var(--pri2);font-weight:700">[13]</a></p>
 <div class="cols">
@@ -148,7 +140,7 @@ footer{border-top:1px solid var(--line);margin-top:26px;padding:18px 0 26px;colo
 <div class="card"><span class="big">36%</span>mengobati diri tanpa ke dokter</div>
 <div class="card"><span class="big">27%</span>mengabaikan resep karena tidak cocok dengan info internet</div>
 </div></div>
- 
+
 <div class="sec"><h2>Cara pakainya</h2>
 <div class="cols">
 <div class="card"><b>1. Pilih keluhan</b><br>Yang paling mirip dengan yang kamu rasakan.</div>
@@ -156,14 +148,14 @@ footer{border-top:1px solid var(--line);margin-top:26px;padding:18px 0 26px;colo
 <div class="card"><b>3. Lihat hasilnya</b><br>Disertai langkah awal dan ke mana kamu bisa minta bantuan.</div>
 </div></div>
 </section>
- 
+
 <section id="keluhan" class="view">
 <div class="sec"><h2>Keluhan apa yang kamu rasakan?</h2>
 <p class="mut" style="margin:0">Pilih satu. Jawabanmu tidak disimpan.</p>
 <div class="chips" id="chips"></div>
 <div class="grid" id="grid"></div></div>
 </section>
- 
+
 <section id="bersih" class="view">
 <div class="sec"><h2>Menjaga kebersihan area intim</h2>
 <p class="mut">Kebiasaan kecil di toilet sekolah ternyata berpengaruh. Tekan judulnya untuk membaca.</p>
@@ -176,7 +168,7 @@ footer{border-top:1px solid var(--line);margin-top:26px;padding:18px 0 26px;colo
 <p class="note">Catatan: tips kebersihan di halaman ini adalah praktik umum yang dirangkum tim dan masih perlu divalidasi tenaga kesehatan. Dasar penilaian untuk tiap keluhan ada di halaman Sumber.</p>
 <div class="row"><button class="btn" onclick="go('keluhan')">Cek keluhan</button></div></div>
 </section>
- 
+
 <section id="siswi" class="view">
 <div class="sec"><div class="fem">
 <h2>Khusus siswi</h2>
@@ -184,11 +176,11 @@ footer{border-top:1px solid var(--line);margin-top:26px;padding:18px 0 26px;colo
 <div class="grid" id="gridF"></div></div>
 <div class="row"><button class="btn ghost" onclick="go('bersih')">Baca juga tips kebersihan</button></div></div>
 </section>
- 
+
 <section id="triase" class="view"><div class="sec">
 <h2>Triase: memilah berdasarkan tingkat kegawatan</h2>
 <p class="mut">Triase adalah cara memilah pasien menurut seberapa gawat kondisinya, supaya yang paling membutuhkan ditangani lebih dulu. Di IGD rumah sakit, pemilahan ini memakai empat warna. Itu juga alasan kata "triase" ada di nama PEKA.</p>
- 
+
 <h3 style="margin:18px 0 0">Triase di IGD rumah sakit</h3>
 <div class="tri">
 <div class="tm"><h3>Merah</h3><span class="lv">Gawat darurat, prioritas tinggi</span><p>Kondisi mengancam nyawa dan perlu pertolongan segera.</p><ul><li>Henti napas atau jantung</li><li>Gangguan jalan napas</li><li>Kejang berkelanjutan</li><li>Cedera kepala berat</li><li>Perdarahan hebat</li></ul></div>
@@ -197,7 +189,7 @@ footer{border-top:1px solid var(--line);margin-top:26px;padding:18px 0 26px;colo
 <div class="tb"><h3>Hitam</h3><span class="lv">Prioritas rendah</span><p>Pasien meninggal, atau kondisinya sangat parah dan tidak ada harapan hidup.</p></div>
 </div>
 <p class="note">Kategori dan contoh di atas mengacu pada poster triase IGD RSU Hermina Sukabumi <a href="#" onclick="go('sumber');return false" style="color:var(--pri2);font-weight:700">[14]</a>.</p>
- 
+
 <h3 style="margin:22px 0 0">Triase di PEKA</h3>
 <p class="mut">PEKA memakai logika yang sama, tetapi disederhanakan menjadi tiga tingkat dan khusus untuk keluhan urogenital dan reproduksi pelajar. Yang dinilai bukan nama penyakitnya, melainkan seberapa cepat kamu perlu ke tenaga kesehatan.</p>
 <div class="tri three">
@@ -206,17 +198,17 @@ footer{border-top:1px solid var(--line);margin-top:26px;padding:18px 0 26px;colo
 <div class="th"><h3>Hijau</h3><span class="lv">Pantau dulu</span><p>Belum ada tanda bahaya. Lakukan langkah awal dan perhatikan perkembangannya.</p><ul><li>Gatal ringan setelah berkeringat</li><li>Sembelit sesekali</li><li>Perubahan siklus haid di tahun pertama</li></ul></div>
 </div>
 <div class="card"><b>Kenapa kategori hitam tidak dipakai?</b><p style="margin:4px 0 0">Kategori hitam dipakai untuk pasien yang sudah meninggal atau tidak tertolong, terutama saat korban banyak. Skrining mandiri di sekolah tidak untuk situasi itu.</p></div>
- 
+
 <h3 style="margin:22px 0 8px">Kenapa triase, bukan diagnosis</h3>
 <div class="card"><ul>
 <li><b>Tanpa pemeriksaan, diagnosis tidak mungkin.</b> Penyakit tidak bisa dipastikan dari jawaban ya atau tidak. Yang bisa dilakukan adalah mengenali tanda bahaya dan menentukan urgensinya.</li>
 <li><b>Anonim.</b> Tanpa nama dan tanpa login, diharapkan rasa malu berkurang sehingga pelajar mau menjawab apa adanya dan tidak berhenti di hasil pencarian internet.</li>
-<li><b>Berbasis QR di bilik toilet.</b> Keluhan intim biasanya muncul dan terpikirkan di tempat privat. QR di bilik membuat skrining bisa dibuka saat itu juga, tanpa harus bertanya ke siapa pun.</li>
+<li><b>Bisa dibuka di tempat privat.</b> Keluhan intim biasanya muncul dan terpikirkan saat sendirian, jadi skrining dibuat bisa dibuka saat itu juga, tanpa harus bertanya ke siapa pun.</li>
 <li><b>Mengarahkan, bukan menggantikan.</b> Setiap hasil berujung pada langkah nyata: PMR, UKS, Puskesmas, atau IGD.</li></ul></div>
 <p class="note">Triase PEKA bukan triase klinis. Di IGD, triase dilakukan petugas terlatih yang memeriksa tanda vital dan kondisi pasien langsung. PEKA hanya membantu langkah paling awal, sebelum pelajar bertemu tenaga kesehatan.</p>
 <div class="row"><button class="btn" onclick="go('keluhan')">Coba cek keluhan</button><button class="btn ghost" onclick="go('sumber')">Lihat sumber</button></div>
 </div></section>
- 
+
 <section id="bantuan" class="view"><div class="sec"><h2>Mau menghubungi siapa?</h2>
 <p class="mut">Mulai dari yang paling dekat denganmu. Kamu boleh memilih orang yang paling kamu percaya.</p>
 <div class="card" style="margin-bottom:14px"><b>PMR di sekolahmu</b>
@@ -224,7 +216,7 @@ footer{border-top:1px solid var(--line);margin-top:26px;padding:18px 0 26px;colo
 <p style="margin:6px 0"><b>Cara menghubungi:</b></p>
 <ol><li>Cari anggota PMR yang piket di UKS, atau pembina PMR (guru) di sekolahmu: <span id="pmrk"></span>.</li><li>Cukup bilang, "Aku butuh bantuan kesehatan." Kamu tidak wajib menjelaskan semuanya di depan orang banyak.</li><li>Kalau sekolahmu belum punya PMR aktif, hubungi PMI kabupaten atau kota setempat lewat guru atau orang tuamu.</li></ol></div>
 <div class="help" id="helpAll"></div></div></section>
- 
+
 <section id="sumber" class="view"><div class="sec"><h2>Sumber dan sitasi</h2>
 <p class="mut">Pertanyaan dan batas hasil di PEKA disusun dari pedoman klinis berikut. Angka dalam kurung siku di halaman hasil merujuk ke nomor di bawah.</p>
 <div class="card" style="margin-bottom:14px"><b>Cara PEKA menilai</b><ul>
@@ -239,19 +231,19 @@ footer{border-top:1px solid var(--line);margin-top:26px;padding:18px 0 26px;colo
 <li>Pertanyaan dirangkum dari pedoman untuk anak dan remaja, tetapi belum diuji validitas dan reliabilitasnya. Sebelum dipakai di sekolah, perlu ditinjau dokter atau tenaga kesehatan.</li>
 <li>Rujukan 12 dan 13 dikutip dari naskah tim; detail publikasinya perlu dilengkapi.</li>
 <li>Tips kebersihan merupakan praktik umum dan belum semuanya bersumber pada pedoman tunggal.</li></ul></div></div></section>
- 
+
 <section id="quiz" class="view"><div class="sec quiz" id="quizBox"></div></section>
- 
+
 <section id="tentang" class="view">
 <div class="sec"><h2>Tentang PEKA</h2>
-<div class="card"><p>PEKA adalah situs edukasi kebersihan dan triase anonim yang diakses lewat kode QR di bilik toilet sekolah. Tujuannya membantu pelajar mengenali keluhan urogenital dan reproduksi lebih awal, dan tahu kapan harus ke tenaga kesehatan.</p>
+<div class="card"><p>PEKA adalah situs edukasi kebersihan dan triase anonim untuk pelajar sekolah. Tujuannya membantu pelajar mengenali keluhan urogenital dan reproduksi lebih awal, dan tahu kapan harus ke tenaga kesehatan.</p>
 <ul><li>Tanpa akun, tanpa nama, jawaban tidak disimpan.</li><li>Hasil dibagi tiga: pantau dulu, periksa dalam beberapa hari, dan segera periksa.</li><li>Setiap hasil menyertakan langkah awal dan pilihan tempat meminta bantuan.</li></ul>
 <p class="note">Ini versi prototype. PEKA bukan alat diagnosis dan tidak menggantikan pemeriksaan tenaga kesehatan. Pertanyaan dan aturan hasilnya masih contoh dan perlu divalidasi tenaga medis.</p></div></div>
 </section>
 </main>
- 
+
 <footer><div class="wrap">PEKA dan Pita, prototype. <a href="#" onclick="go('tentang');return false" style="color:var(--pri2)">Tentang</a>. Kalau keluhanmu berat atau mendadak, langsung ke fasilitas kesehatan terdekat.</div></footer>
- 
+
 <script>
 const REFS=[
 ["ACOG Committee Opinion No. 651. Menstruation in girls and adolescents: using the menstrual cycle as a vital sign. Obstet Gynecol. 2015;126(6):e143-e146.","https://pubmed.ncbi.nlm.nih.gov/26595586/"],
@@ -354,13 +346,7 @@ ${c.safe?`<div class="card" style="margin-top:12px"><b>Kalau ini terjadi tanpa p
 <h3 style="margin:18px 0 0">Pilihan tempat meminta bantuan</h3><div class="help">${helpHTML()}</div>
 <div class="row"><button class="btn ${c.g==='f'?'rose':''}" onclick="start('${cur}')">Ulangi</button><button class="btn ghost" onclick="go('keluhan')">Keluhan lain</button></div>
 <p class="note">Hasil ini bukan diagnosis. Yang bisa memastikan kondisimu adalah tenaga kesehatan.</p>`}
-function qr(){const N=29,s=document.getElementById('qr');let o=`<rect width="${N}" height="${N}" fill="#fff"/>`,x=7;
-const f=(a,b)=>{o+=`<rect x="${a}" y="${b}" width="7" height="7" fill="#12403b"/><rect x="${a+1}" y="${b+1}" width="5" height="5" fill="#fff"/><rect x="${a+2}" y="${b+2}" width="3" height="3" fill="#12403b"/>`};
-const inF=(i,j)=>(i<9&&j<9)||(i>N-10&&j<9)||(i<9&&j>N-10);
-for(let i=0;i<N;i++)for(let j=0;j<N;j++){x=(x*1103515245+12345)&0x7fffffff;if(!inF(i,j)&&(x>>16)%100<46)o+=`<rect x="${i}" y="${j}" width="1" height="1" fill="#12403b"/>`}
-f(1,1);f(N-8,1);f(1,N-8);s.innerHTML=o}
-nav('home');renderGrid();qr();renderRefs();
+nav('home');renderGrid();renderRefs();
 </script>
 </body>
 </html>
- 
