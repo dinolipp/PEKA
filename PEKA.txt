@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PEKA: Pendeteksian dan Edukasi Keluhan Area Intim</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fffdfc;--card:#fff;--ink:#2f2a3b;--mut:#6f6a7e;--pri:#BCD8EC;--pri2:#4a76a0;--onpri:#2f2a3b;--soft:#eef5fb;--rose:#b5487a;--rsoft:#ffe9f2;--line:#efe7ee;--mint:#D6E5BD;--lav:#DCCCEC;--lem:#F9E1A8;--peach:#FFDAB4;--pink:#FFCBE1;--blue:#BCD8EC;--g:#5c8f3e;--y:#b8861a;--r:#d2475a;--tm:#ffc4cf;--tk:#F9E1A8;--th:#D6E5BD;--tb:#e0dcea;--tbd:#e8798b;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1c1a26;--card:#262333;--ink:#f0ecf7;--mut:#b2abc4;--pri:#BCD8EC;--pri2:#BCD8EC;--onpri:#1f1b2b;--soft:#2e2b40;--rose:#FFCBE1;--rsoft:#3d2a38;--line:#3a3650;--mint:#2f3d2a;--lav:#37304a;--lem:#40371f;--peach:#44322a;--pink:#4a2f40;--blue:#2a3b4d;--g:#a9cf86;--y:#e8c56a;--r:#ef8a99;--tm:#4a2a33;--tk:#40371f;--th:#2f3d2a;--tb:#2f2d3d;--tbd:#ef8a99;}}
+:root[data-theme="dark"]{--bg:#1c1a26;--card:#262333;--ink:#f0ecf7;--mut:#b2abc4;--pri:#BCD8EC;--pri2:#BCD8EC;--onpri:#1f1b2b;--soft:#2e2b40;--rose:#FFCBE1;--rsoft:#3d2a38;--line:#3a3650;--mint:#2f3d2a;--lav:#37304a;--lem:#40371f;--peach:#44322a;--pink:#4a2f40;--blue:#2a3b4d;--g:#a9cf86;--y:#e8c56a;--r:#ef8a99;--tm:#4a2a33;--tk:#40371f;--th:#2f3d2a;--tb:#2f2d3d;--tbd:#ef8a99;}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Nunito',system-ui,-apple-system,Segoe UI,sans-serif;line-height:1.6;font-size:16px}
+.wrap{max-width:940px;margin:0 auto;padding:0 18px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 0}
+.logo{font-weight:800;font-size:1.3rem;letter-spacing:.04em;color:var(--pri2);cursor:pointer;display:flex;align-items:center;gap:6px}.mini{width:36px;height:36px}
+nav{display:flex;gap:2px;overflow-x:auto}
+nav button{border:0;background:none;color:var(--mut);font:700 .9rem inherit;font-family:inherit;padding:8px 11px;border-radius:8px;cursor:pointer;white-space:nowrap}
+nav button.on{color:var(--pri2);box-shadow:inset 0 -3px 0 var(--pri2);border-radius:0}
+h1{font-size:clamp(1.7rem,4.6vw,2.5rem);line-height:1.2;margin:0 0 12px;font-weight:800}
+h2{font-size:1.4rem;margin:0 0 6px}
+h3{margin:0 0 4px;font-size:1rem}
+p{margin:0 0 10px}
+.mut{color:var(--mut)}
+.hero{display:grid;grid-template-columns:1.25fr .75fr;gap:30px;align-items:center;padding:28px;margin-top:16px;border-radius:20px;background:radial-gradient(circle at 10% 15%,var(--pink) 0,transparent 36%),radial-gradient(circle at 94% 10%,var(--lav) 0,transparent 34%),radial-gradient(circle at 85% 98%,var(--blue) 0,transparent 38%),var(--card);border:1px solid var(--line)}
+.btn{border:0;font-family:inherit;font-weight:700;font-size:1rem;padding:11px 20px;border-radius:8px;cursor:pointer;background:var(--pri);color:var(--onpri)}
+.btn.ghost{background:transparent;color:var(--pri2);border:1.5px solid var(--pri2)}
+.btn.rose{background:var(--pink)}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.qrbox{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px;text-align:center}
+.qrbox svg{width:100%;max-width:190px;height:auto}
+.qrbox small{display:block;color:var(--mut);margin-top:8px;font-size:.82rem}
+.sec{padding:22px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px}
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.cols .card b{color:var(--pri2)}
+.big{font-size:1.8rem;font-weight:800;color:var(--pri2);line-height:1.1;display:block}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+.chip{border:1.5px solid var(--line);background:var(--card);color:var(--ink);font:700 .85rem inherit;font-family:inherit;padding:6px 13px;border-radius:99px;cursor:pointer}
+.chip.on{background:var(--pri);color:var(--onpri);border-color:var(--pri2)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.concern{text-align:left;cursor:pointer;font-family:inherit;color:var(--ink)}
+.concern:hover{border-color:var(--pri)}
+.concern p{margin:0;color:var(--mut);font-size:.88rem}
+.tag{display:inline-block;font-size:.72rem;font-weight:800;padding:2px 8px;border-radius:99px;background:var(--soft);color:var(--pri2);margin-top:8px}
+.tag.f{background:var(--rsoft);color:var(--rose)}
+.fem{background:var(--rsoft);border-radius:12px;padding:22px}
+.fem .concern:hover{border-color:var(--rose)}
+details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin-bottom:10px}
+summary{font-weight:800;cursor:pointer}
+details p,details ul{margin:8px 0 0;color:var(--ink)}
+.quiz{max-width:620px;margin:0 auto}
+.bar{height:6px;background:var(--soft);border-radius:99px;overflow:hidden;margin:10px 0 18px}
+.bar div{height:100%;background:var(--pri);transition:width .25s}
+.q{font-size:1.25rem;font-weight:800;margin:0 0 18px}
+.ans{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ans button{font:800 1.05rem inherit;font-family:inherit;padding:14px;border-radius:10px;border:2px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.ans button:hover{border-color:var(--pri)}
+.res{border-radius:12px;padding:18px;border:2px solid}
+.res.g{border-color:var(--g)}.res.y{border-color:var(--y)}.res.r{border-color:var(--r)}
+.res h2{margin:0 0 4px}
+.res.g h2{color:var(--g)}.res.y h2{color:var(--y)}.res.r h2{color:var(--r)}
+ul,ol{padding-left:20px;margin:6px 0}
+li{margin:4px 0}
+.help{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin-top:8px}
+.note{font-size:.82rem;color:var(--mut);margin-top:14px}
+.back{background:none;border:0;color:var(--mut);font:700 .88rem inherit;font-family:inherit;cursor:pointer;padding:0;margin-bottom:10px}
+footer{border-top:1px solid var(--line);margin-top:26px;padding:18px 0 26px;color:var(--mut);font-size:.84rem}
+.mascot{text-align:center}.mascot svg{width:100%;max-width:230px;height:auto;animation:bob 3.2s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-7px)}}
+@media(prefers-reduced-motion:reduce){.mascot svg{animation:none}}
+.bubble{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:9px 14px;font-weight:700;font-size:.92rem;display:inline-block}
+.mascot .bubble{margin-bottom:6px}
+.pitarow{display:flex;gap:10px;align-items:center;margin-bottom:14px}.mini2{width:56px;height:56px;flex:none}
+.full{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+.full div{border-radius:14px;padding:16px 10px;text-align:center}
+.full b{display:block;font-size:2.4rem;line-height:1;color:var(--ink)}
+.full span{font-weight:700;font-size:.92rem;color:var(--ink)}
+.qrrow{display:grid;grid-template-columns:.7fr 1.3fr;gap:16px;align-items:center}
+.grid .concern:nth-child(4n+1){border-top:5px solid var(--mint)}.grid .concern:nth-child(4n+2){border-top:5px solid var(--lav)}.grid .concern:nth-child(4n+3){border-top:5px solid var(--peach)}.grid .concern:nth-child(4n){border-top:5px solid var(--lem)}
+.tri{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:12px 0}
+.tri div{border-radius:16px;padding:16px;border:2px solid transparent}
+.tri h3{margin:0 0 2px;font-size:1.15rem}
+.tri .lv{font-size:.8rem;font-weight:800;display:inline-block;background:var(--card);border-radius:99px;padding:2px 10px;margin:4px 0 8px}
+.tri p{margin:0 0 6px;font-size:.92rem}.tri ul{margin:4px 0 0;font-size:.9rem}
+.tm{background:var(--tm);border-color:var(--tbd)}.tk{background:var(--tk)}.th{background:var(--th)}.tb{background:var(--tb)}
+.tri.three{grid-template-columns:repeat(3,1fr)}
+.dots{display:flex;gap:6px;align-items:center;margin-top:12px}.dots i{width:14px;height:14px;border-radius:50%;display:inline-block}
+@media(max-width:720px){.tri,.tri.three{grid-template-columns:1fr}}
+.view{display:none}.view.on{display:block}
+@media(max-width:720px){.hero{grid-template-columns:1fr;padding-top:22px}.cols{grid-template-columns:1fr}.full{grid-template-columns:1fr 1fr}.qrrow{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="pita" viewBox="0 0 200 200">
+<path d="M165 176 C120 176 62 176 52 150 C42 124 82 120 120 118 C150 116 152 86 112 86" fill="none" stroke="#c5dba3" stroke-width="30" stroke-linecap="round"/>
+<g fill="#e2eecb"><circle cx="140" cy="176" r="5"/><circle cx="95" cy="176" r="5"/><circle cx="52" cy="152" r="5"/><circle cx="100" cy="122" r="5"/><circle cx="142" cy="108" r="5"/></g>
+<circle cx="104" cy="76" r="34" fill="#c5dba3"/>
+<circle cx="92" cy="72" r="6" fill="#27384a"/><circle cx="118" cy="72" r="6" fill="#27384a"/><circle cx="94" cy="70" r="2" fill="#fff"/><circle cx="120" cy="70" r="2" fill="#fff"/>
+<ellipse cx="81" cy="86" rx="7" ry="4.5" fill="#f9b8cf"/><ellipse cx="129" cy="86" rx="7" ry="4.5" fill="#f9b8cf"/>
+<path d="M97 86 Q105 95 113 86" fill="none" stroke="#27384a" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M105 94 V102 M105 102 L101 107 M105 102 L109 107" stroke="#f06b95" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+<g transform="translate(128 46)"><path d="M0 0 L-20 -12 L-20 12 Z M0 0 L20 -12 L20 12 Z" fill="#f48fb1"/><circle r="6" fill="#e0678f"/></g>
+</symbol></svg>
+<header><div class="wrap nav"><div class="logo" onclick="go('home')"><svg class="mini" viewBox="0 0 200 200"><use href="#pita"/></svg>PEKA</div><nav id="nav"></nav></div></header>
+ 
+<main class="wrap">
+<section id="home" class="view on">
+<div class="hero">
+<div>
+<p class="mut" style="font-weight:700;margin-bottom:6px">Pendeteksian dan Edukasi Keluhan Area Intim</p>
+<h1>Ada yang terasa tidak nyaman? Cek dulu di sini.</h1>
+<p class="mut">Kamu membuka halaman ini lewat QR di bilik toilet sekolah. Di sini kamu bisa mencocokkan keluhanmu dengan beberapa pertanyaan singkat, lalu membaca cara menjaga kebersihan area intim. Tidak perlu login dan tidak ada yang tahu siapa kamu.</p>
+<div class="row"><button class="btn" onclick="go('keluhan')">Cek keluhan</button><button class="btn ghost" onclick="go('bersih')">Baca soal kebersihan</button></div>
+</div>
+<div class="mascot"><div class="bubble">Halo, aku Pita! Di sini tidak ada yang tahu kamu siapa.</div><svg viewBox="0 0 200 200" role="img" aria-label="Pita, maskot PEKA berbentuk ular lucu"><use href="#pita"/></svg></div>
+</div>
+ 
+<div class="sec"><h2>Apa itu PEKA?</h2>
+<p class="mut" style="margin-bottom:0">PEKA adalah singkatan dari <b>Pendeteksian dan Edukasi Keluhan Area Intim</b>. Namanya juga ajakan untuk lebih peka pada kondisi tubuh sendiri.</p>
+<div class="full">
+<div style="background:var(--mint)"><b>P</b><span>Pendeteksian</span></div>
+<div style="background:var(--lem)"><b>E</b><span>Edukasi</span></div>
+<div style="background:var(--peach)"><b>K</b><span>Keluhan</span></div>
+<div style="background:var(--lav)"><b>A</b><span>Area Intim</span></div>
+</div>
+</div>
+ 
+<div class="sec"><h2>Triase ala PEKA</h2>
+<p class="mut" style="margin-bottom:0">Seperti triase di IGD, hasilmu dikelompokkan berdasarkan seberapa cepat kamu perlu ke tenaga kesehatan.</p>
+<div class="tri three" style="margin-bottom:8px">
+<div class="tm"><h3>Merah</h3><span class="lv">Segera periksa</span></div>
+<div class="tk"><h3>Kuning</h3><span class="lv">1 sampai 3 hari</span></div>
+<div class="th"><h3>Hijau</h3><span class="lv">Pantau dulu</span></div></div>
+<button class="btn ghost" onclick="go('triase')">Baca penjelasan triase</button></div>
+ 
+<div class="sec"><div class="qrrow"><div class="qrbox"><svg id="qr" viewBox="0 0 29 29" shape-rendering="crispEdges"></svg><small>Contoh QR di pintu atau dinding bilik</small></div>
+<div><h2>Tinggal scan di bilik toilet</h2><p class="mut">QR ditempel di dalam bilik, jadi kamu bisa membukanya sendirian dan tanpa harus bertanya ke siapa pun. Kalau perlu, Pita akan membantu mengarahkan ke bantuan yang tepat.</p></div></div></div>
+ 
+ 
+<div class="sec"><h2>Kenapa dibuat</h2>
+<p class="mut">Banyak remaja memilih mencari jawaban sendiri di internet, karena malu atau karena topiknya dianggap tabu. Hasilnya sering salah paham. <a href="#" onclick="go('sumber');return false" style="color:var(--pri2);font-weight:700">[12]</a> <a href="#" onclick="go('sumber');return false" style="color:var(--pri2);font-weight:700">[13]</a></p>
+<div class="cols">
+<div class="card"><span class="big">6 dari 10</span>remaja Indonesia pernah mendiagnosis diri sendiri (ANTARA, 2026)</div>
+<div class="card"><span class="big">36%</span>mengobati diri tanpa ke dokter</div>
+<div class="card"><span class="big">27%</span>mengabaikan resep karena tidak cocok dengan info internet</div>
+</div></div>
+ 
+<div class="sec"><h2>Cara pakainya</h2>
+<div class="cols">
+<div class="card"><b>1. Pilih keluhan</b><br>Yang paling mirip dengan yang kamu rasakan.</div>
+<div class="card"><b>2. Jawab ya atau tidak</b><br>Sekitar 5 sampai 6 pertanyaan.</div>
+<div class="card"><b>3. Lihat hasilnya</b><br>Disertai langkah awal dan ke mana kamu bisa minta bantuan.</div>
+</div></div>
+</section>
+ 
+<section id="keluhan" class="view">
+<div class="sec"><h2>Keluhan apa yang kamu rasakan?</h2>
+<p class="mut" style="margin:0">Pilih satu. Jawabanmu tidak disimpan.</p>
+<div class="chips" id="chips"></div>
+<div class="grid" id="grid"></div></div>
+</section>
+ 
+<section id="bersih" class="view">
+<div class="sec"><h2>Menjaga kebersihan area intim</h2>
+<p class="mut">Kebiasaan kecil di toilet sekolah ternyata berpengaruh. Tekan judulnya untuk membaca.</p>
+<details><summary>Cara membasuh yang benar</summary><p>Basuh dengan air bersih dari depan ke belakang, supaya kuman dari anus tidak terbawa ke saluran kemih atau vagina. Setelah itu keringkan dengan tisu bersih atau handuk kecil pribadi. Area yang masih basah membuat kulit gampang lembap dan gatal.</p></details>
+<details><summary>Soal gayung dan bak air</summary><p>Kalau di toilet sekolah memakai gayung, bilas gayung dengan air mengalir sebelum dipakai dan jangan sampai menyentuh area intim. Perhatikan juga apakah air di bak tampak keruh atau berlendir. Kalau iya, lebih baik pakai air dari keran dan laporkan ke petugas sekolah.</p></details>
+<details><summary>Jangan menahan BAK dan BAB</summary><p>Menahan pipis terlalu lama memberi kesempatan kuman berkembang di kandung kemih. Menahan BAB bisa membuat tinja mengeras. Kalau tidak nyaman memakai toilet sekolah, kamu tidak sendirian, dan itu bisa disampaikan ke guru atau pengelola sekolah.</p></details>
+<details><summary>Memilih celana dalam</summary><ul><li>Pilih bahan katun yang menyerap keringat.</li><li>Ganti setelah olahraga atau kalau terasa lembap.</li><li>Cuci bersih dan jemur sampai benar-benar kering.</li><li>Jangan bertukar pakaian dalam atau handuk.</li></ul></details>
+<details><summary>Sabun, pewangi, dan pembersih khusus</summary><p>Bagian dalam vagina membersihkan dirinya sendiri. Sabun beraroma, cairan pembersih khusus, atau douching justru bisa mengganggu keseimbangan alaminya. Cukup air bersih dan sabun lembut tanpa pewangi untuk bagian luar.</p></details>
+<details><summary>Saat haid</summary><p>Ganti pembalut sekitar 4 sampai 6 jam sekali, atau lebih cepat kalau penuh. Bungkus bekas pembalut dengan kertas atau plastik, buang ke tempat sampah, jangan dibuang ke kloset. Cuci tangan sebelum dan sesudahnya.</p></details>
+<p class="note">Catatan: tips kebersihan di halaman ini adalah praktik umum yang dirangkum tim dan masih perlu divalidasi tenaga kesehatan. Dasar penilaian untuk tiap keluhan ada di halaman Sumber.</p>
+<div class="row"><button class="btn" onclick="go('keluhan')">Cek keluhan</button></div></div>
+</section>
+ 
+<section id="siswi" class="view">
+<div class="sec"><div class="fem">
+<h2>Khusus siswi</h2>
+<p class="mut">Haid, keputihan, dan keluhan di area kewanitaan itu hal biasa untuk ditanyakan. Pilih yang sesuai.</p>
+<div class="grid" id="gridF"></div></div>
+<div class="row"><button class="btn ghost" onclick="go('bersih')">Baca juga tips kebersihan</button></div></div>
+</section>
+ 
+<section id="triase" class="view"><div class="sec">
+<h2>Triase: memilah berdasarkan tingkat kegawatan</h2>
+<p class="mut">Triase adalah cara memilah pasien menurut seberapa gawat kondisinya, supaya yang paling membutuhkan ditangani lebih dulu. Di IGD rumah sakit, pemilahan ini memakai empat warna. Itu juga alasan kata "triase" ada di nama PEKA.</p>
+ 
+<h3 style="margin:18px 0 0">Triase di IGD rumah sakit</h3>
+<div class="tri">
+<div class="tm"><h3>Merah</h3><span class="lv">Gawat darurat, prioritas tinggi</span><p>Kondisi mengancam nyawa dan perlu pertolongan segera.</p><ul><li>Henti napas atau jantung</li><li>Gangguan jalan napas</li><li>Kejang berkelanjutan</li><li>Cedera kepala berat</li><li>Perdarahan hebat</li></ul></div>
+<div class="tk"><h3>Kuning</h3><span class="lv">Darurat tidak gawat, prioritas sedang</span><p>Tidak ada ancaman kematian langsung, tetapi bisa terjadi kecacatan kalau tidak ditangani.</p><ul><li>Patah tulang</li><li>Luka bakar</li><li>Asma</li><li>Demam di atas 39 derajat</li><li>Diare dengan dehidrasi</li></ul></div>
+<div class="th"><h3>Hijau</h3><span class="lv">Tidak gawat darurat, prioritas rendah</span><p>Tidak ada ancaman kematian.</p><ul><li>Luka lecet</li><li>Diare tanpa dehidrasi</li><li>Demam, sakit kepala</li><li>Mual muntah</li><li>Batuk pilek</li></ul></div>
+<div class="tb"><h3>Hitam</h3><span class="lv">Prioritas rendah</span><p>Pasien meninggal, atau kondisinya sangat parah dan tidak ada harapan hidup.</p></div>
+</div>
+<p class="note">Kategori dan contoh di atas mengacu pada poster triase IGD RSU Hermina Sukabumi <a href="#" onclick="go('sumber');return false" style="color:var(--pri2);font-weight:700">[14]</a>.</p>
+ 
+<h3 style="margin:22px 0 0">Triase di PEKA</h3>
+<p class="mut">PEKA memakai logika yang sama, tetapi disederhanakan menjadi tiga tingkat dan khusus untuk keluhan urogenital dan reproduksi pelajar. Yang dinilai bukan nama penyakitnya, melainkan seberapa cepat kamu perlu ke tenaga kesehatan.</p>
+<div class="tri three">
+<div class="tm"><h3>Merah</h3><span class="lv">Segera periksa</span><p>Ada tanda bahaya. Hubungi PMR atau UKS hari ini, lalu ke Puskesmas atau IGD.</p><ul><li>Nyeri testis mendadak dan hebat</li><li>Demam disertai nyeri pinggang saat BAK</li><li>Darah di tinja atau urine</li><li>Haid sangat banyak sampai hampir pingsan</li></ul></div>
+<div class="tk"><h3>Kuning</h3><span class="lv">Periksa dalam 1 sampai 3 hari</span><p>Ada beberapa gejala yang perlu dinilai, belum tampak darurat.</p><ul><li>BAK perih dan sering tetapi tanpa demam</li><li>Keputihan berbau dengan gatal</li><li>Nyeri haid yang mengganggu sekolah</li></ul></div>
+<div class="th"><h3>Hijau</h3><span class="lv">Pantau dulu</span><p>Belum ada tanda bahaya. Lakukan langkah awal dan perhatikan perkembangannya.</p><ul><li>Gatal ringan setelah berkeringat</li><li>Sembelit sesekali</li><li>Perubahan siklus haid di tahun pertama</li></ul></div>
+</div>
+<div class="card"><b>Kenapa kategori hitam tidak dipakai?</b><p style="margin:4px 0 0">Kategori hitam dipakai untuk pasien yang sudah meninggal atau tidak tertolong, terutama saat korban banyak. Skrining mandiri di sekolah tidak untuk situasi itu.</p></div>
+ 
+<h3 style="margin:22px 0 8px">Kenapa triase, bukan diagnosis</h3>
+<div class="card"><ul>
+<li><b>Tanpa pemeriksaan, diagnosis tidak mungkin.</b> Penyakit tidak bisa dipastikan dari jawaban ya atau tidak. Yang bisa dilakukan adalah mengenali tanda bahaya dan menentukan urgensinya.</li>
+<li><b>Anonim.</b> Tanpa nama dan tanpa login, diharapkan rasa malu berkurang sehingga pelajar mau menjawab apa adanya dan tidak berhenti di hasil pencarian internet.</li>
+<li><b>Berbasis QR di bilik toilet.</b> Keluhan intim biasanya muncul dan terpikirkan di tempat privat. QR di bilik membuat skrining bisa dibuka saat itu juga, tanpa harus bertanya ke siapa pun.</li>
+<li><b>Mengarahkan, bukan menggantikan.</b> Setiap hasil berujung pada langkah nyata: PMR, UKS, Puskesmas, atau IGD.</li></ul></div>
+<p class="note">Triase PEKA bukan triase klinis. Di IGD, triase dilakukan petugas terlatih yang memeriksa tanda vital dan kondisi pasien langsung. PEKA hanya membantu langkah paling awal, sebelum pelajar bertemu tenaga kesehatan.</p>
+<div class="row"><button class="btn" onclick="go('keluhan')">Coba cek keluhan</button><button class="btn ghost" onclick="go('sumber')">Lihat sumber</button></div>
+</div></section>
+ 
+<section id="bantuan" class="view"><div class="sec"><h2>Mau menghubungi siapa?</h2>
+<p class="mut">Mulai dari yang paling dekat denganmu. Kamu boleh memilih orang yang paling kamu percaya.</p>
+<div class="card" style="margin-bottom:14px"><b>PMR di sekolahmu</b>
+<p style="margin:6px 0">PMR (Palang Merah Remaja) adalah teman sebaya di sekolah yang dilatih pertolongan pertama dan kesehatan dasar di bawah PMI. Mereka bisa menemanimu ke UKS, menghubungkanmu ke guru atau petugas kesehatan, dan membantu memberi tahu orang tua kalau kamu mau. Mereka bukan dokter, jadi tidak mendiagnosis dan tidak memberi obat. Kamu boleh meminta ceritamu tidak disebarkan.</p>
+<p style="margin:6px 0"><b>Cara menghubungi:</b></p>
+<ol><li>Cari anggota PMR yang piket di UKS, atau pembina PMR (guru) di sekolahmu: <span id="pmrk"></span>.</li><li>Cukup bilang, "Aku butuh bantuan kesehatan." Kamu tidak wajib menjelaskan semuanya di depan orang banyak.</li><li>Kalau sekolahmu belum punya PMR aktif, hubungi PMI kabupaten atau kota setempat lewat guru atau orang tuamu.</li></ol></div>
+<div class="help" id="helpAll"></div></div></section>
+ 
+<section id="sumber" class="view"><div class="sec"><h2>Sumber dan sitasi</h2>
+<p class="mut">Pertanyaan dan batas hasil di PEKA disusun dari pedoman klinis berikut. Angka dalam kurung siku di halaman hasil merujuk ke nomor di bawah.</p>
+<div class="card" style="margin-bottom:14px"><b>Cara PEKA menilai</b><ul>
+<li><b>Tanda bahaya (triase merah):</b> gejala yang menurut pedoman perlu dinilai langsung. Satu jawaban "ya" sudah cukup untuk hasil Segera periksa.</li>
+<li><b>Gejala (triase kuning):</b> dua gejala atau lebih berarti Periksa dalam 1 sampai 3 hari.</li>
+<li><b>Faktor pemicu:</b> kebiasaan seperti menahan BAK. Ini tidak menaikkan urgensi, tetapi dicatat sebagai hal yang mungkin berperan.</li>
+<li>Penilaian sengaja dibuat berhati-hati: lebih baik diarahkan periksa daripada terlewat.</li></ul></div>
+<h3 style="margin:16px 0 6px">Daftar rujukan</h3>
+<ol id="refs"></ol>
+<div class="card" style="margin-top:14px"><b>Keterbatasan</b><ul>
+<li>PEKA adalah prototype skrining, bukan alat diagnosis.</li>
+<li>Pertanyaan dirangkum dari pedoman untuk anak dan remaja, tetapi belum diuji validitas dan reliabilitasnya. Sebelum dipakai di sekolah, perlu ditinjau dokter atau tenaga kesehatan.</li>
+<li>Rujukan 12 dan 13 dikutip dari naskah tim; detail publikasinya perlu dilengkapi.</li>
+<li>Tips kebersihan merupakan praktik umum dan belum semuanya bersumber pada pedoman tunggal.</li></ul></div></div></section>
+ 
+<section id="quiz" class="view"><div class="sec quiz" id="quizBox"></div></section>
+ 
+<section id="tentang" class="view">
+<div class="sec"><h2>Tentang PEKA</h2>
+<div class="card"><p>PEKA adalah situs edukasi kebersihan dan triase anonim yang diakses lewat kode QR di bilik toilet sekolah. Tujuannya membantu pelajar mengenali keluhan urogenital dan reproduksi lebih awal, dan tahu kapan harus ke tenaga kesehatan.</p>
+<ul><li>Tanpa akun, tanpa nama, jawaban tidak disimpan.</li><li>Hasil dibagi tiga: pantau dulu, periksa dalam beberapa hari, dan segera periksa.</li><li>Setiap hasil menyertakan langkah awal dan pilihan tempat meminta bantuan.</li></ul>
+<p class="note">Ini versi prototype. PEKA bukan alat diagnosis dan tidak menggantikan pemeriksaan tenaga kesehatan. Pertanyaan dan aturan hasilnya masih contoh dan perlu divalidasi tenaga medis.</p></div></div>
+</section>
+</main>
+ 
+<footer><div class="wrap">PEKA dan Pita, prototype. <a href="#" onclick="go('tentang');return false" style="color:var(--pri2)">Tentang</a>. Kalau keluhanmu berat atau mendadak, langsung ke fasilitas kesehatan terdekat.</div></footer>
+ 
+<script>
+const REFS=[
+["ACOG Committee Opinion No. 651. Menstruation in girls and adolescents: using the menstrual cycle as a vital sign. Obstet Gynecol. 2015;126(6):e143-e146.","https://pubmed.ncbi.nlm.nih.gov/26595586/"],
+["NICE. Urinary tract infection in under 16s: diagnosis and management (NG224). 2022.","https://www.nice.org.uk/guidance/ng224"],
+["Children's Health Queensland. Acute scrotal pain: emergency management in children (pedoman klinis).","https://www.childrens.health.qld.gov.au/guideline-acute-scrotal-pain-emergency-management-in-children/"],
+["Tabbers MM, et al. Evaluation and treatment of functional constipation in infants and children: ESPGHAN/NASPGHAN guidelines. J Pediatr Gastroenterol Nutr. 2014;58(2):258-274.",""],
+["Hyams JS, et al. Functional disorders: children and adolescents (Rome IV). Gastroenterology. 2016;150(6):1456-1468.",""],
+["Workowski KA, et al. Sexually transmitted infections treatment guidelines, 2021. MMWR Recomm Rep. 2021;70(4):1-187.",""],
+["ACOG Committee Opinion No. 760. Dysmenorrhea and endometriosis in the adolescent. Obstet Gynecol. 2018;132(6):e249-e258.",""],
+["ACOG Committee Opinion No. 785. Screening and management of bleeding disorders in adolescents with heavy menstrual bleeding. Obstet Gynecol. 2019;134(3):e71-e83.",""],
+["Libman I, et al. ISPAD Clinical Practice Consensus Guidelines 2022: definition, epidemiology, and classification of diabetes in children and adolescents. Pediatr Diabetes. 2022;23(8):1160-1174.",""],
+["Kementerian PPPA. Layanan Sahabat Perempuan dan Anak (SAPA) 129: telepon 129, WhatsApp 08111-129-129.","https://bali.antaranews.com/berita/326748/pemprov-bali-gunakan-sapa-129-untuk-pengaduan-kekerasan-perempuan-dan-anak"],
+["Kementerian Kesehatan RI. Layanan Halo Kemenkes 1500-567.",""],
+["ANTARA (2026). Survei swadiagnosis remaja Indonesia (dikutip dalam naskah tim; lengkapi judul dan tautan).",""],
+["Kobryn M, Duplaga M (2024). Kemampuan remaja menilai informasi kesehatan daring (dikutip dalam naskah tim; lengkapi judul jurnal).",""],
+["Poster Triase: Prioritas Kegawatdaruratan dalam Pelayanan IGD. RSU Hermina Sukabumi (materi edukasi, diberikan tim; lengkapi tahun dan sumber).",""]];
+const PMR_KONTAK="ruang PMR atau pembina PMR (diisi sesuai sekolah)";
+const HELP=[["PMR sekolah","Teman sebaya terlatih pertolongan pertama. Bisa menemanimu ke UKS dan menghubungkan ke petugas kesehatan. Kontak: "+PMR_KONTAK+"."],["UKS atau guru BK","Tempat bercerita dan dicatat di sekolah. Bisa membantu merujuk ke Puskesmas."],["Puskesmas","Pemeriksaan dan konsultasi. Tanyakan layanan kesehatan peduli remaja (PKPR)."],["Orang dewasa yang kamu percaya","Orang tua, kakak, atau wali yang bisa menemanimu periksa."],["Halo Kemenkes 1500-567","Informasi layanan kesehatan dari Kemenkes, termasuk kesehatan reproduksi."],["SAPA 129","Untuk kekerasan atau pelecehan pada anak dan perempuan: telepon 129 atau WhatsApp 08111-129-129."]];
+const C={
+bab:{t:"BAB terasa sakit",d:"Nyeri saat BAB atau sembelit",g:"all",ref:[4,5],
+why:"Darah di tinja, nyeri perut hebat, demam, muntah, dan berat badan turun termasuk tanda bahaya pada sembelit anak dan remaja. Kriteria sembelit fungsional mencakup BAB dua kali seminggu atau kurang, tinja keras atau besar, dan nyeri saat BAB.",
+q:[["Ada darah merah di tinja atau tisu, atau tinja berwarna hitam seperti aspal?",2],["Perutmu nyeri hebat, atau perut tampak membesar dan keras?",2],["Kamu demam atau muntah terus-menerus?",2],["Berat badanmu turun tanpa kamu berdiet?",2],["Kamu BAB dua kali seminggu atau kurang?",1],["Tinjamu keras, besar, atau sulit dikeluarkan?",1],["Terasa sakit atau perih saat BAB, atau ada celah kecil di anus?",1],["Keluhan sudah lebih dari 2 minggu?",1],["Kamu sering menahan BAB, misalnya karena toilet sekolah kurang nyaman?",0,"sering menahan BAB"],["Kamu jarang makan sayur dan buah, atau jarang minum air putih?",0,"kurang serat dan cairan"]],
+tips:["Minum air putih cukup, makan sayur dan buah, dan biasakan duduk di toilet 5 sampai 10 menit setelah makan.","Jangan menahan BAB dan jangan mengejan terlalu kuat.","Jangan memakai obat pencahar tanpa saran tenaga kesehatan."]},
+bak:{t:"BAK perih atau nyeri",d:"Pipis terasa sakit atau panas",g:"all",ref:[2,6],
+why:"Nyeri saat BAK, demam, nyeri perut bagian bawah, dan nyeri tekan di pinggang adalah tanda yang meningkatkan kemungkinan infeksi saluran kemih pada anak dan remaja, sehingga urine perlu diperiksa. Keluhan serupa juga bisa muncul pada infeksi menular seksual, jadi perlu dinilai tenaga kesehatan.",
+q:[["Kamu demam (suhu 38 derajat atau lebih) atau menggigil?",2],["Ada nyeri atau pegal di pinggang atau punggung bawah, biasanya satu sisi?",2],["Urine berwarna merah atau ada darahnya?",2],["Kamu muntah-muntah sampai sulit minum?",2],["Terasa perih atau panas saat BAK?",1],["Sering ingin BAK tetapi yang keluar hanya sedikit?",1],["Ada nyeri di perut bagian bawah, di atas tulang kemaluan?",1],["Urine tampak keruh atau berbau sangat menyengat?",1],["Keluhan sudah lebih dari 2 hari?",1],["Kamu pernah didiagnosis infeksi saluran kemih sebelumnya?",0,"riwayat infeksi saluran kemih"],["Kamu sering menahan BAK atau jarang minum?",0,"menahan BAK atau kurang minum"]],
+tips:["Minum air putih secara teratur dan jangan menahan BAK.","Bilas dengan air bersih dari depan ke belakang, lalu keringkan.","Jangan membeli antibiotik sendiri. Antibiotik diberikan setelah pemeriksaan."]},
+urine:{t:"Sering BAK atau urine berubah",d:"Frekuensi atau warna pipis tidak biasa",g:"all",ref:[9,2],
+why:"Sering BAK, sangat haus, lemas, dan berat badan turun tanpa sebab bisa menjadi tanda diabetes sehingga perlu pemeriksaan gula darah. Urine merah atau seperti teh pekat, serta bengkak bersama urine berbusa, perlu dinilai tenaga kesehatan.",
+q:[["Urine berwarna merah atau cokelat pekat seperti teh?",2],["Kelopak mata atau kakimu bengkak bersamaan dengan urine berbusa?",2],["Kamu sangat sering haus dan banyak minum?",1],["Kamu BAK jauh lebih sering dari biasanya, termasuk bangun malam untuk BAK?",1],["Berat badanmu turun tanpa kamu berdiet?",1],["Kamu mudah lelah atau lemas?",1],["Urine sering keruh atau berbusa?",1],["Keluhan sudah lebih dari seminggu?",1],["Ada anggota keluarga dekat dengan diabetes?",0,"riwayat diabetes di keluarga"]],
+tips:["Urine kuning pucat biasanya tanda cukup minum.","Catat kapan keluhan muncul, seberapa sering, dan kapan kamu minum.","Pemeriksaan sederhana seperti urine atau gula darah bisa dilakukan di Puskesmas."]},
+gatal:{t:"Gatal atau ruam di area intim",d:"Gatal, kemerahan, atau lecet",g:"all",ref:[6],
+why:"Gatal dan kemerahan sering disebabkan iritasi (sabun, keringat, gesekan) atau jamur. Luka, lepuh, atau nanah yang menetap perlu dinilai langsung karena bisa berkaitan dengan infeksi kulit atau infeksi menular seksual.",
+q:[["Ada luka terbuka, lepuh berkelompok, atau bintil bernanah?",2],["Disertai demam atau menggigil?",2],["Gatal sudah lebih dari 3 hari?",1],["Kulit tampak merah, bengkak, atau ada ruam bersisik putih?",1],["Kamu menggaruk sampai lecet?",1],["Gatalnya makin parah dari hari ke hari?",1],["Kamu sering memakai celana ketat atau jarang mengganti pakaian yang lembap?",0,"pakaian ketat atau lembap"],["Kamu baru memakai sabun, deterjen, atau pembersih baru?",0,"produk baru yang mungkin mengiritasi"],["Kamu pernah berbagi handuk atau pakaian dalam?",0,"berbagi handuk atau pakaian dalam"]],
+tips:["Pakai celana dalam katun yang longgar dan ganti jika lembap.","Jangan digaruk. Hindari sabun beraroma, bedak, atau krim yang tidak diresepkan.","Jangan berbagi handuk atau pakaian dalam."]},
+benjol:{t:"Benjolan, luka, atau cairan tidak biasa",d:"Perubahan yang terlihat di area kelamin",g:"all",ref:[6,10],safe:true,
+why:"Luka, benjolan, atau cairan tidak biasa dari kelamin perlu dinilai tenaga kesehatan karena penyebabnya tidak bisa dipastikan dari gejala saja, termasuk kemungkinan infeksi menular seksual. Pertanyaan tentang sentuhan yang tidak diinginkan ada karena anak dan remaja berhak mendapat perlindungan.",
+q:[["Ada luka terbuka di area kelamin?",2],["Keluar nanah atau cairan kental dari kelamin?",2],["Ada benjolan keras yang membesar atau tidak hilang?",2],["Keluhan ini muncul setelah ada sentuhan atau kontak di area kelamin yang tidak kamu inginkan atau tidak kamu pahami?",2],["Ada bintil atau kutil kecil yang bergerombol?",1],["Terasa nyeri atau perih saat BAK?",1],["Cairan berbau atau berwarna tidak biasa?",1],["Keluhan sudah lebih dari 3 hari?",1]],
+tips:["Jangan dipencet, digores, atau diobati sendiri dengan obat dari internet.","Datang ke Puskesmas. Kamu berhak dilayani dengan menjaga privasimu.","Hindari menyentuh area yang luka sampai diperiksa."]},
+testis:{t:"Nyeri atau bengkak di testis",d:"Khusus siswa",g:"m",ref:[3],urgent:"Nyeri testis yang tiba-tiba dan hebat bisa berarti testis terpelintir. Ini darurat: sebaiknya sampai ke IGD dalam beberapa jam, bukan besok pagi.",
+why:"Nyeri testis mendadak dan hebat, kadang disertai mual, muntah, atau nyeri perut, harus dianggap sebagai torsio testis sampai terbukti bukan. Penanganannya idealnya dalam sekitar 6 jam sejak nyeri mulai agar testis bisa diselamatkan.",
+q:[["Nyeri muncul tiba-tiba dan hebat di satu sisi?",2],["Kantong buah zakar membengkak, memerah, atau satu sisi tampak lebih tinggi dari biasanya?",2],["Ada mual, muntah, atau nyeri perut bagian bawah bersamaan?",2],["Pernah ada nyeri mendadak yang hilang sendiri, lalu berulang?",2],["Nyeri ringan setelah olahraga atau terbentur?",1],["Teraba benjolan di kantong zakar?",1],["Terasa berat atau tidak nyaman sepanjang hari?",1],["Terasa perih saat BAK?",1]],
+tips:["Jangan menunggu nyeri hilang sendiri, apalagi sampai besok.","Kalau nyeri ringan setelah benturan dan tidak membengkak, tetap ceritakan ke UKS atau PMR."]},
+putih:{t:"Keputihan yang tidak biasa",d:"Cairan vagina berubah warna, bau, atau jumlah",g:"f",ref:[6],
+why:"Keputihan jernih atau putih tanpa bau yang berubah mengikuti siklus haid umumnya normal. Keputihan berbau amis, berwarna kuning-hijau, atau menggumpal disertai gatal bisa berkaitan dengan vaginosis bakterialis, infeksi jamur, atau infeksi lain yang perlu dikonfirmasi lewat pemeriksaan.",
+q:[["Disertai nyeri perut bagian bawah, demam, atau nyeri saat berjalan?",2],["Keluar cairan bercampur nanah atau darah?",2],["Warnanya kuning, hijau, atau abu-abu?",1],["Berbau amis menyengat, terutama setelah haid?",1],["Menggumpal putih seperti keju dan terasa gatal?",1],["Terasa perih atau panas saat BAK, atau perih di bibir kemaluan?",1],["Ada bercak darah di luar jadwal haid?",1],["Berlangsung lebih dari seminggu?",1],["Kamu memakai pantyliner hampir setiap hari?",0,"pemakaian pantyliner setiap hari"],["Kamu membersihkan bagian dalam vagina atau memakai cairan pembersih khusus?",0,"pembersih khusus atau douching"]],
+tips:["Keputihan jernih atau putih tanpa bau, terutama menjelang haid, umumnya normal.","Basuh bagian luar dengan air bersih dari depan ke belakang lalu keringkan. Jangan membersihkan bagian dalam vagina.","Jangan membeli obat vagina sendiri sebelum diperiksa."]},
+nyeri:{t:"Nyeri haid yang berat",d:"Nyeri atau perdarahan haid yang mengganggu",g:"f",ref:[7,8],
+why:"Nyeri haid yang mengganggu aktivitas dan tidak membaik dengan obat pereda nyeri dalam beberapa siklus perlu dinilai karena bisa ada penyebab lain seperti endometriosis. Perdarahan haid yang sangat banyak perlu diperiksa karena bisa berkaitan dengan gangguan pembekuan darah.",
+q:[["Kamu pernah pingsan atau hampir pingsan karena nyeri atau perdarahan haid?",2],["Perdarahan sangat banyak: pembalut penuh dalam 1 sampai 2 jam, atau keluar gumpalan besar?",2],["Perdarahan haid berlangsung lebih dari 7 hari?",2],["Nyeri perut bawah hebat dan mendadak, terutama saat tidak sedang haid?",2],["Nyeri muncul tiap haid dan membuatmu tidak masuk sekolah?",1],["Obat pereda nyeri yang biasa kamu pakai tidak membantu?",1],["Disertai mual, muntah, atau diare saat haid?",1],["Nyeri terasa makin berat dibanding beberapa bulan lalu?",1],["Kamu mudah memar atau mimisan yang sulit berhenti?",1]],
+tips:["Kompres hangat di perut bagian bawah dan istirahat cukup.","Pakai obat pereda nyeri sesuai aturan di kemasan, dan tanyakan ke apoteker atau petugas kesehatan jika ragu.","Catat tanggal mulai haid, lamanya, jumlah pembalut per hari, dan tingkat nyeri."]},
+siklus:{t:"Haid tidak teratur",d:"Telat, terlalu sering, atau terlalu lama",g:"f",ref:[1],
+why:"Pada remaja, siklus haid umumnya 21 sampai 45 hari dan haid berlangsung 7 hari atau kurang. Jeda lebih dari 3 bulan perlu dievaluasi, begitu pula belum haid pada usia 15 tahun, karena hampir semua remaja sudah haid pada usia itu.",
+q:[["Jeda antara dua haid lebih dari 3 bulan, padahal sebelumnya sudah pernah haid?",2],["Haid berlangsung lebih dari 7 hari atau sangat banyak?",2],["Usiamu 15 tahun atau lebih dan belum pernah haid?",2],["Nyeri perut bawah hebat atau pusing sampai hampir pingsan?",2],["Siklusmu lebih pendek dari 21 hari?",1],["Siklusmu lebih panjang dari 45 hari?",1],["Tumbuh jerawat parah atau rambut tebal di wajah atau badan bersamaan dengan haid yang tidak teratur?",1],["Berat badan naik atau turun drastis, diet ketat, atau olahraga sangat berat belakangan ini?",0,"perubahan berat badan, diet, atau olahraga berat"],["Sedang stres berat atau kurang tidur?",0,"stres atau kurang tidur"]],
+tips:["Pada 1 sampai 3 tahun pertama setelah haid pertama, siklus yang belum teratur masih bisa wajar selama masih di rentang 21 sampai 45 hari.","Catat tanggal pertama setiap haid supaya polanya terlihat.","Tidur cukup, makan teratur, dan kelola stres."]},
+bau:{t:"Gatal atau bau di area kewanitaan",d:"Kebersihan dan kenyamanan area intim",g:"f",ref:[6],
+why:"Perubahan bau dan gatal sering berkaitan dengan kebiasaan membersihkan, kelembapan, atau keseimbangan alami vagina yang terganggu. Bau amis yang menetap, luka, atau nyeri perut bawah perlu pemeriksaan.",
+q:[["Ada luka, lecet nyeri, atau benjolan di bibir kemaluan?",2],["Disertai demam atau nyeri perut bagian bawah?",2],["Bau berubah menjadi amis atau menyengat?",1],["Gatal sudah lebih dari 3 hari?",1],["Ada kemerahan atau rasa terbakar di area luar?",1],["Kamu memakai pantyliner hampir setiap hari?",0,"pemakaian pantyliner setiap hari"],["Kamu membasuh dengan sabun beraroma atau cairan pembersih khusus?",0,"sabun beraroma atau pembersih khusus"],["Kamu membasuh dari belakang ke depan?",0,"arah membasuh dari belakang ke depan"],["Pakaian dalam sering lembap atau ketat, atau pembalut diganti lebih dari 6 jam sekali?",0,"pakaian lembap atau pembalut jarang diganti"]],
+tips:["Basuh bagian luar dengan air bersih dari depan ke belakang, lalu keringkan.","Ganti pembalut sekitar 4 sampai 6 jam sekali dan pilih celana dalam katun.","Hindari sabun beraroma, cairan pembersih khusus, dan douching."]}
+};
+let filter="all",cur=null,idx=0,score=0,red=false,hist=[];
+function nav(v){const L=[["home","Beranda"],["keluhan","Cek Keluhan"],["triase","Triase"],["bersih","Kebersihan"],["siswi","Khusus Siswi"],["bantuan","Bantuan"],["sumber","Sumber"]];
+document.getElementById('nav').innerHTML=L.map(([k,t])=>`<button class="${k===v?'on':''}" onclick="go('${k}')">${t}</button>`).join('')}
+function go(v){document.querySelectorAll('.view').forEach(x=>x.classList.toggle('on',x.id===v));nav(v==='quiz'?'keluhan':v);window.scrollTo(0,0)}
+function card(k){const c=C[k];const tag=c.g==='f'?'<span class="tag f">Siswi</span>':c.g==='m'?'<span class="tag">Siswa</span>':'<span class="tag">Semua</span>';
+return `<button class="card concern" onclick="start('${k}')"><h3>${c.t}</h3><p>${c.d}</p>${tag}</button>`}
+function renderGrid(){
+document.getElementById('chips').innerHTML=[["all","Semua"],["u","Umum"],["m","Siswa"],["f","Siswi"]].map(([k,t])=>`<button class="chip ${filter===k?'on':''}" onclick="filter='${k}';renderGrid()">${t}</button>`).join('');
+const keys=Object.keys(C).filter(k=>filter==='all'||(filter==='u'?C[k].g==='all':C[k].g===filter));
+document.getElementById('grid').innerHTML=keys.map(card).join('');
+document.getElementById('gridF').innerHTML=Object.keys(C).filter(k=>C[k].g==='f').map(card).join('')}
+function start(k){cur=k;idx=0;score=0;red=false;hist=[];go('quiz');q()}
+function q(){const c=C[cur],n=c.q.length;
+document.getElementById('quizBox').innerHTML=`<button class="back" onclick="${idx?'undo()':"go('keluhan')"}">&larr; ${idx?'Pertanyaan sebelumnya':'Pilih keluhan lain'}</button>
+<h3 class="mut">${c.t}</h3>
+<div class="pitarow"><svg class="mini2" viewBox="0 0 200 200"><use href="#pita"/></svg><div class="bubble">${idx===0?"Jawab apa adanya ya, tidak ada yang menilai.":idx===n-1?"Pertanyaan terakhir!":"Pelan-pelan saja, aku di sini."}</div></div>
+<div class="bar"><div style="width:${idx/n*100}%"></div></div>
+<p class="note" style="margin:0 0 6px">Pertanyaan ${idx+1} dari ${n}</p>
+<p class="q">${c.q[idx][0]}</p>
+<div class="ans"><button onclick="ans(1)">Ya</button><button onclick="ans(0)">Tidak</button></div>
+<p class="note">Jawabanmu tidak disimpan dan tidak dikaitkan dengan identitasmu.</p>`}
+function calc(){score=hist.filter(h=>h[0]&&h[1]===1).length;red=hist.some(h=>h[0]&&h[1]===2)}
+function ans(y){const x=C[cur].q[idx];hist.push([y,x[1],x[2]||'']);calc();idx++;idx<C[cur].q.length?q():result()}
+function undo(){hist.pop();calc();idx--;q()}
+function cite(a){return a.map(n=>`<a href="#" onclick="go('sumber');return false" style="color:var(--pri2);font-weight:700">[${n}]</a>`).join(' ')}
+function helpHTML(){return HELP.map(h=>`<div class="card"><b>${h[0]}</b><p style="margin:2px 0 0;color:var(--mut);font-size:.88rem">${h[1]}</p></div>`).join('')}
+function renderRefs(){document.getElementById('refs').innerHTML=REFS.map(r=>`<li>${r[0]}${r[1]?` <a href="${r[1]}" target="_blank" rel="noopener" style="color:var(--pri2)">Tautan</a>`:''}</li>`).join('');document.getElementById('helpAll').innerHTML=helpHTML();document.getElementById('pmrk').textContent=PMR_KONTAK}
+const T={
+r:{k:'r',h:'Triase merah: segera periksa ke tenaga kesehatan',p:'Ada tanda bahaya pada jawabanmu yang perlu dinilai langsung oleh tenaga kesehatan. Sebaiknya jangan ditunda dan jangan diobati sendiri.',m:'Yuk segera ke tenaga kesehatan. Kamu tidak sendirian.',s:['Hari ini juga, sampaikan ke anggota atau pembina PMR, guru piket, atau petugas UKS: “Aku butuh bantuan kesehatan sekarang.” Kamu tidak wajib menceritakan detailnya di depan orang banyak.','Minta diantar ke Puskesmas atau IGD terdekat, dan hubungi orang tua atau wali.','Bawa catatan singkat: sejak kapan keluhannya, seberapa berat, dan obat apa yang sudah kamu minum.']},
+y:{k:'y',h:'Triase kuning: periksa dalam 1 sampai 3 hari',p:'Ada beberapa gejala yang perlu dinilai. Kalau memburuk atau muncul tanda bahaya, periksa segera.',m:'Coba periksa dalam beberapa hari ya.',s:['Datangi UKS atau PMR di sekolahmu untuk dicatat dan diarahkan.','Periksa ke Puskesmas dalam 1 sampai 3 hari. Tanyakan layanan kesehatan remaja (PKPR).','Sambil menunggu, lakukan langkah awal di bawah dan catat perkembangannya.']},
+g:{k:'g',h:'Triase hijau: pantau dulu',p:'Belum ada tanda bahaya dan gejalamu masih sedikit. Lakukan langkah awal dan pantau perkembangannya.',m:'Aman dulu ya, tapi tetap dipantau.',s:['Lakukan langkah awal di bawah selama beberapa hari.','Kalau keluhan bertahan lebih dari seminggu atau bertambah, temui UKS atau PMR dan periksa ke Puskesmas.','Kalau muncul demam, darah, nyeri hebat, atau luka, ulangi skrining dan segera periksa.']}};
+function result(){const c=C[cur],t=red?T.r:score>=2?T.y:T.g;
+const fac=hist.filter(h=>h[0]&&h[1]===0).map(h=>h[2]);
+document.getElementById('quizBox').innerHTML=`<div class="pitarow"><svg class="mini2" viewBox="0 0 200 200"><use href="#pita"/></svg><div class="bubble">${t.m}</div></div>
+<div class="res ${t.k}"><h2>${t.h}</h2><p style="margin:0">${t.p}</p>${red&&c.urgent?`<p style="margin:8px 0 0"><b>${c.urgent}</b></p>`:''}</div>
+<div class="card" style="margin-top:12px"><b>Kemana kamu harus menghubungi</b><ol>${t.s.map(x=>`<li>${x}</li>`).join('')}</ol><p style="margin:6px 0 0"><a href="#" onclick="go('bantuan');return false" style="color:var(--pri2);font-weight:700">Lihat cara menghubungi PMR dan layanan lain</a></p></div>
+<div class="card" style="margin-top:12px"><b>Langkah awal yang bisa dilakukan</b><ul>${c.tips.map(x=>`<li>${x}</li>`).join('')}</ul>${fac.length?`<p class="note" style="margin-top:8px">Hal yang mungkin berperan pada keluhanmu: ${fac.join(', ')}.</p>`:''}</div>
+${c.safe?`<div class="card" style="margin-top:12px"><b>Kalau ini terjadi tanpa persetujuanmu</b><p style="margin:4px 0 0">Itu bukan salahmu. Ceritakan ke guru BK atau orang dewasa yang kamu percaya, atau hubungi SAPA 129 lewat telepon 129 atau WhatsApp 08111-129-129 ${cite([10])}.</p></div>`:''}
+<div class="card" style="margin-top:12px"><b>Dasar penilaian</b> ${cite(c.ref)}<p style="margin:4px 0 0;font-size:.92rem">${c.why}</p></div>
+<h3 style="margin:18px 0 0">Pilihan tempat meminta bantuan</h3><div class="help">${helpHTML()}</div>
+<div class="row"><button class="btn ${c.g==='f'?'rose':''}" onclick="start('${cur}')">Ulangi</button><button class="btn ghost" onclick="go('keluhan')">Keluhan lain</button></div>
+<p class="note">Hasil ini bukan diagnosis. Yang bisa memastikan kondisimu adalah tenaga kesehatan.</p>`}
+function qr(){const N=29,s=document.getElementById('qr');let o=`<rect width="${N}" height="${N}" fill="#fff"/>`,x=7;
+const f=(a,b)=>{o+=`<rect x="${a}" y="${b}" width="7" height="7" fill="#12403b"/><rect x="${a+1}" y="${b+1}" width="5" height="5" fill="#fff"/><rect x="${a+2}" y="${b+2}" width="3" height="3" fill="#12403b"/>`};
+const inF=(i,j)=>(i<9&&j<9)||(i>N-10&&j<9)||(i<9&&j>N-10);
+for(let i=0;i<N;i++)for(let j=0;j<N;j++){x=(x*1103515245+12345)&0x7fffffff;if(!inF(i,j)&&(x>>16)%100<46)o+=`<rect x="${i}" y="${j}" width="1" height="1" fill="#12403b"/>`}
+f(1,1);f(N-8,1);f(1,N-8);s.innerHTML=o}
+nav('home');renderGrid();qr();renderRefs();
+</script>
+</body>
+</html>
+ 
